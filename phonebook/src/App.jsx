@@ -186,7 +186,7 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
-      <h2>Numbers</h2>
+      <h2>Contacts({persons.length})</h2>
       <Final_list />
     </div>
   )

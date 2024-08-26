@@ -58,46 +58,15 @@ app.post('/api/persons',(request,response)=>{
     .then((result)=>{
         response.json(result)
     })
+    .catch((error)=>{
+        response.status(400).json({error: error.name})
+    })
     
     
 
 
 })
 
-/*app.post('/api/persons',(request,response)=>{
-    const new_person = request.body
-
-    if (!new_person.name) {
-        response.status(400).json({error:"name missing"})
-        return
-    }
-    if (!new_person.number) {
-        response.status(400).json({error:"number missing"})
-        return
-    }
-
-    for (let p of persons) {
-        if (p.name===new_person.name) {
-            response.status(400).json({error: `${p.name} already exists`})
-            return
-        }
-    }
-
-    let new_id = persons[0].id
-    const range=1000
-    while ((persons.filter((n)=>{return n.id==new_id})).length>0) {
-        new_id = Math.round(Math.random()*range)
-    }
-
-    const new_p = {id:new_id,
-        name:new_person.name,
-        number:new_person.number
-    }
-    persons = persons.concat(new_p)
-    response.json(new_p)
-
-
-})*/
 
 app.get('/api/persons',(request,response)=>{
     Contact.find({})

@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
 
+
 //const base_url = 'http://localhost:3001/api/persons'
 const base_url = "/api/persons"
 
@@ -87,7 +88,14 @@ const App = () => {
       
     })
     .catch((response)=>{
-      setMessage(`Unable to add ${newName}`)
+      let error_message=''
+      if (response.response.data.error==='ValidationError') {
+        error_message = `${newName} is not a valid name!`
+      }
+      else if (response.response.data.error) {
+        error_message = response.response.data.error
+      }
+      setMessage(`Unable to add ${newName} : ${error_message}`)
       set_msg_color('red')
       setTimeout(()=>{setMessage(null)},3000)
     })
